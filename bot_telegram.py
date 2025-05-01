@@ -2,6 +2,7 @@
 
 import os
 from dotenv import load_dotenv
+from sqlalchemy import text
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 from app.db.base import Base, engine
@@ -27,7 +28,10 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     
     if RESET == "si" :
-        Base.metadata.drop_all(bind=engine)
+        with engine.connect() as conn:
+            conn.execute(text("SET FOREIGN_KEY_CHECKS = 0;"))
+            conn.execute(text("DROP TABLE IF EXISTS usuario, frente, mensaje, recuerdo, entrada_diaria;"))
+            conn.execute(text("SET FOREIGN_KEY_CHECKS = 1;"))
     Base.metadata.create_all(bind=engine)
 
     print("🤖 Sofía está escuchando en Telegram...")
