@@ -191,8 +191,10 @@ def get_frente_actual(db, usuario_id: int):
 
 
 @usar_sesion
-def usuario_existe(db, usuario_id: int) -> bool:
-    return db.query(Usuario).filter_by(id=usuario_id).first() is not None
+def usuario_existe(db, id_usuario):
+    print(f" Buscando usuario con ID: {id_usuario}")
+    return db.query(Usuario).filter_by(id=id_usuario).first() is not None
+
 
 @usar_sesion
 def crear_usuario(db, usuario_id: int):
