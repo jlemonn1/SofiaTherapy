@@ -1,0 +1,8 @@
+sqlalchemy
+pymysql
+python-dotenv
+sqlalchemy>=1.4
+mysql-connector-python>=8.0
+python-telegram-bot==20.7
+huggingface_hub==0.30.2
+

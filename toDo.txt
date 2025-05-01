@@ -1,0 +1,2 @@
+bajar cada cuanto se genera un recuerdo
+se tienee que generar uno de cada tipo con el contexto que haya
