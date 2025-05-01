@@ -1,5 +1,5 @@
 # app/models/mensaje.py
-from sqlalchemy import BigInteger, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import BigInteger, Column, Integer, Text, DateTime, String, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db.base import Base
@@ -11,7 +11,7 @@ class Mensaje(Base):
     usuario_id = Column(BigInteger, ForeignKey("usuario.id"), nullable=False)
     frente_id  = Column(Integer, ForeignKey("frente.id"), nullable=True)
 
-    texto   = Column(String(1000), nullable=False)
+    texto   = Column(Text, nullable=False)
     origen  = Column(String(10), nullable=False)  # 'usuario' | 'sofia'
     momento = Column(DateTime, default=datetime.utcnow)
 
