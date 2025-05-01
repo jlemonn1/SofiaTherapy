@@ -10,6 +10,7 @@ from app.ia.motor import procesar
 
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
+RESET = os.getenv("RESET")
 
 # Respuesta a cada mensaje de texto
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -25,6 +26,8 @@ if __name__ == "__main__":
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     
+    if RESET == "si" :
+        Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
     print("🤖 Sofía está escuchando en Telegram...")
